@@ -1,0 +1,44 @@
+.mouseheart{
+    width:15px;
+    height:15px;
+    background-color:#cc2a5d;
+    position: absolute;
+    transform: rotate(45deg);
+    animation: mouseheart 1s ease-in ;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.mouseheart::before,
+.mouseheart::after{
+    content:'';
+    width:100%;
+    height:100%;
+    background-color:#cc2a5d;
+    border-radius: 50%;
+}
+.mouseheart::before{
+    position: absolute;
+    top:0;
+    left:0;
+    transform: translateX(-50%);
+}
+.mouseheart::after{
+    position: absolute;
+    top:0;
+    left:0;
+    transform: translateY(-50%);
+}
+@keyframes mouseheart{
+    0%{
+        transform: scale(0.8) rotate(45deg);
+        opacity: 0.8;
+    }
+    50%{
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(0.8) rotate(45deg);
+        opacity: 0;
+    }
+}

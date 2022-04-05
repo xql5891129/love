@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>爱之屋</title>
+    <link rel="stylesheet" href="../css/mouse.css" />
+    <link rel="stylesheet" href="../css/bgFloat.css" />
+    <link rel="stylesheet" href="../css/btnBorder.css" />
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" style="background: #fccbbc">
+        <div class="layui-logo layui-hide-xs">
+            <img src="../image/logo.png">
+        </div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <!-- 移动端显示 -->
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                <i class="layui-icon layui-icon-spread-left"></i>
+            </li>
+
+            <li class="layui-nav-item layui-hide-xs border-sty layui-this"><a href="">主页</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="">聊天</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="">回忆录</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="">个人信息</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                <a href="javascript:;">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">个人信息</a></dd>
+                    <dd><a href="">设置</a></dd>
+                    <dd><a href="">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-more-vertical"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="layui-body textCon" style="left: 0px;">
+        <!-- 内容主体区域 -->
+
+    </div>
+
+    <div class="layui-footer" style="left: 0px;text-align: center;">
+        <!-- 底部固定区域 -->
+        @copyright 2022-2024  www.jaymu.top  430斧头帮
+    </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script src="../js/mouse.js"></script>
+<script src="../js/bgFloat.js"></script>
+<script>
+    //JS
+    layui.use(['element', 'layer', 'util'], function(){
+        var element = layui.element
+            ,layer = layui.layer
+            ,util = layui.util
+            ,$ = layui.$;
+
+        //头部事件
+        util.event('lay-header-event', {
+            //左侧菜单事件
+            menuLeft: function(othis){
+                layer.msg('展开左侧菜单的操作', {icon: 0});
+            }
+            ,menuRight: function(){
+                layer.open({
+                    type: 1
+                    ,title:'音乐'
+                    ,content: '<div style="padding: 15px;"><button id="1">123123</button</div>'
+                    ,area: ['260px', '100%']
+                    ,offset: 'rt' //右上角
+                    ,anim: 1
+                    ,shadeClose: true
+                });
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
