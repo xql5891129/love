@@ -36,7 +36,7 @@
             <mvc:exclude-mapping path="/v2/**"/>
             <mvc:exclude-mapping path="/swagger-ui.html/**"/>
             <!-- 这个类就是我们自定义的Interceptor -->
-            <bean id="commonInterceptor" class="LoginInterceptor"/>
+            <bean id="commonInterceptor" class="interceptor.LoginInterceptor"/>
         </mvc:interceptor>
         <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法  -->
     </mvc:interceptors>

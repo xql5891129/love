@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.xhu.lor.mapper.UserMapper">
+<mapper namespace="mapper.UserMapper">
 
-    <resultMap type="edu.xhu.lor.pojo.User" id="UserMap">
+    <resultMap type="pojo.User" id="UserMap">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
@@ -85,13 +85,13 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" parameterType="edu.xhu.lor.pojo.User">
+    <insert id="insert" parameterType="pojo.User">
         insert into lordb.user(username, password, sex, tel, email, isMate, avatar, last_time)
         values (#{username}, #{password}, #{sex}, #{tel}, #{email}, #{ismate}, #{avatar}, #{lastTime})
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="updateById" parameterType="edu.xhu.lor.pojo.User">
+    <update id="updateById" parameterType="pojo.User">
         update lordb.user
         <set>
             <if test="username != null and username != ''">
