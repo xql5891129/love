@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.DiaryMapper">
+  <resultMap id="DiaryMapper" type="pojo.Diary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="mate_id" jdbcType="INTEGER" property="mateId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <association property="user" resultMap="mapper.UserMapper.UserMap"/>
+  </resultMap>
+
+  <sql id="Beas_Column_List">
+    id,user_id,mate_id,content,`time`
+  </sql>
+
+  <!--查询单个-->
+  <select id="selectById" resultMap="DiaryMapper">
+    select
+      d.id,d.user_id,d.mate_id,d.content,d.time,u.username,u.avatar
+    from lovedb.diary d
+    left join lovedb.user u on d.user_id = u.id
+    where d.user_id = #{id} or d.user_id =#{mateId}
+  </select>
+
+  <!--根据条件查询当前表的满足条件的个数-->
+  <select id="selectForCount" resultType="int">
+    select
+    count(id)
+    from lovedb.diary
+    <where>
+      <if test="name != null and name != ''">
+        name like "%"#{name}"%"
+      </if>
+    </where>
+  </select>
+
+  <!--通过实体作为筛选条件查询-->
+  <select id="selectForPage" resultMap="DiaryMapper">
+    select
+    <include refid="Beas_Column_List"/>
+    from lovedb.diary
+    <where>
+      <if test="user_id != null and user_id != ''">
+        user_id=#{user_id}
+      </if>
+    </where>
+  </select>
+
+  <!--新增所有列-->
+  <insert id="insert" parameterType="pojo.Diary">
+    insert into lovedb.diary( user_id, mate_id, content, `time`)
+    values (#{userId}, #{mateId}, #{content}, #{time})
+  </insert>
+  <!--通过主键删除-->
+  <delete id="deleteById">
+    delete from lovedb.diary where id = #{id}
+  </delete>
+</mapper>

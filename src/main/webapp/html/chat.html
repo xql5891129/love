@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/chat.css" />
+</head>
+<body style="background-image: url(../image/bg1.jpg);background-size: 100%;opacity: 0.5;">
+<div class="wrapper">
+	<div id="historyMsg">
+	</div>
+	<div class="controls">
+		<div class="items">
+			<input id="uploadUrl" type="hidden" value="/upload/image" >
+			<input id="websocketUrl" type="hidden" value="/websocket" >
+			<input id="emojiBaseUrl" type="hidden" value="../layui/images/face/" >
+			<form id="sendImageForm" enctype="multipart/form-data" method="post">
+				<input id="emoji" class="btn btn-primary" type="button" value="emoji" title="emoji"/>
+				<label for="sendImage" class="imageLable">
+					<input id="sendImageBtn" class="btn btn-success" type="button" value="发送图片"/>
+					<input id="sendImage" type="file" value="发送图片" name="image"
+						   accept="image/jpg,image/jpeg,image/png,image/gif"/>
+				</label>
+				<input id="clearBtn" class="btn btn-warning" type="button" value="清屏" title="清除屏幕消息"/>
+				<input id="myName" type="hidden" name="userName">
+				<input id="MateName" type="hidden" name="mateName">
+			</form>
+		</div>
+		<textarea class="form-control" id="messageInput" placeHolder="回车键发送"></textarea>
+		<div id="emojiWrapper">
+		</div>
+	</div>
+</div>
+
+<script src="../jquery/jquery-3.6.0.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../stomp/sockjs.min.js"></script>
+<script src="../stomp/stomp.min.js"></script>
+<script src="../js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>💗💗💗</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/bgFloat.css" />
+    <link rel="stylesheet" href="../css/btnBorder.css" />
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" style="background: #fccbbc">
+        <div class="layui-logo layui-hide-xs">
+        </div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <!-- 移动端显示 -->
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                <i class="layui-icon layui-icon-spread-left"></i>
+            </li>
+
+            <li class="layui-nav-item layui-hide-xs border-sty layui-this"><a href="Carousel.html" target='myIframe'>
+                <i class="layui-icon layui-icon-home" style="font-size: 30px; color: #ffe2e2;margin-right: 30px"></i>主页</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="chat.html" target='myIframe'>
+                <i class="layui-icon layui-icon-dialogue" style="font-size: 30px; color: #ffe2e2;margin-right: 30px"></i>聊天</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="diary.html" target='myIframe'>
+                <i class="layui-icon layui-icon-note" style="font-size: 30px; color: #ffe2e2;margin-right: 30px"></i>回忆录</a></li>
+            <li class="layui-nav-item layui-hide-xs border-sty"><a href="userInfo.html" target='myIframe'>
+                <i class="layui-icon layui-icon-username" style="font-size: 30px; color: #ffe2e2;margin-right: 30px"></i>个人信息</a></li>
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+            <button type="button" class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary" onclick="bf()" id="bf">暂停</button>
+
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                <a href="javascript:;">切换歌曲</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:void(0);" onclick="music1()" >手写的从前—周杰伦</a></dd>
+                    <dd><a href="javascript:void(0);" onclick="music2()" >浪漫手机—周杰伦</a></dd>
+                    <dd><a href="javascript:void(0);" onclick="music3()" >甜甜的—周杰伦</a></dd>
+                    <dd><a href="javascript:void(0);" onclick="music4()" >园游会—周杰伦</a></dd>
+                    <dd><a href="javascript:void(0);" onclick="music5()" >Luv Letter</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                <a href="javascript:;">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img" id="Avatar1">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img" id="Avatar2">
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="userInfo.html" target='myIframe'>个人信息</a></dd>
+                    <dd><a href="">设置</a></dd>
+                    <dd><a href="login.html">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-more-vertical"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="layui-body textCon" style="left: 0px;">
+        <!-- 内容主体区域 -->
+        <audio src="../music/LuvLetter.mp3"  autoplay id="jay"></audio>
+
+        <iframe id='myIframe' name='myIframe' src='Carousel.html'  frameborder="0" width="100%" height="99%">
+        </iframe>
+
+    </div>
+
+    <div class="layui-footer" style="left: 0px;text-align: center;">
+        <!-- 底部固定区域 -->
+        @copyright 2022-2024  www.love.jaymu.top  XQL
+    </div>
+</div>
+
+
+
+
+
+<script src="../layui/layui.js"></script>
+<script src="../jquery/jquery-3.6.0.js"></script>
+<script src="../js/bgFloat.js"></script>
+<script>
+    //JS
+    layui.use(['element', 'layer', 'util'], function(){
+        var element = layui.element
+            ,layer = layui.layer
+            ,util = layui.util
+            ,$ = layui.$;
+
+        //头部事件
+        util.event('lay-header-event', {
+            //右侧菜单事件
+            menuRight: function(){
+                layer.open({
+                    type: 1
+                    ,title:'关于'
+                    ,content: '<div style="padding: 15px;"><i class="layui-icon layui-icon-login-qq"></i>&nbsp&nbsp&nbsp2969699014</div>' +
+                        '<div style="padding: 15px;"><i class="layui-icon layui-icon-email"></i>&nbsp&nbsp&nbsp2969699014@qq.com</div>'+
+                        '<div style="padding: 15px;"><i class="layui-icon layui-icon-login-wechat"></i>&nbsp&nbsp&nbsp123456</div>'+
+                        '<div style="padding: 15px;"><i class="layui-icon layui-icon-login-weibo"></i>&nbsp&nbsp&nbsp123456</div>'
+                    ,area: ['260px', '100%']
+                    ,offset: 'rt' //右上角
+                    ,anim: 1
+                    ,shadeClose: true
+                });
+            }
+        });
+
+    });
+
+    //切换歌曲
+    function  music1(){
+        $("#jay").attr("src","../music/ShouXieDeCongQian.mp3");
+    }
+    function  music2(){
+        $("#jay").attr("src","../music/LangManShouJi.mp3");
+    }
+    function  music3(){
+        $("#jay").attr("src","../music/TianTianDe.mp3");
+    }
+    function  music4(){
+        $("#jay").attr("src","../music/YuanYouHui.mp3");
+    }
+    function  music5(){
+        $("#jay").attr("src","../music/LuvLetter.mp3");
+    }
+
+
+
+    var audio=document.getElementById('jay');
+    var bt=document.getElementById('bf');
+    function bf(){
+        if(audio.paused)                     {
+            audio.play();
+            bt.innerText="暂停"
+        }else{
+            audio.pause();
+            bt.innerText="播放"
+        }
+    }
+
+
+
+    $(function (){
+        $.ajax({
+            type: "get",
+            url: "/user/showAvatar",
+            dataType: "json",
+            success: function (data) {
+                if(data.mateAvatar!=="null")
+                {
+                    $("#Avatar2").attr('src',data.mateAvatar);
+                }
+                if(data.userAvatar!=="null")
+                {
+                    $("#Avatar1").attr('src',data.userAvatar);
+                }
+
+            }
+        });
+    })
+
+
+</script>
+
+
+</body>
+</html>

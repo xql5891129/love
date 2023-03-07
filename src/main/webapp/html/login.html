@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body>
+<div class="login-wrap">
+    <h2>登录</h2>
+    <div class="form">
+        <input type="text" placeholder="用户名" name="un" id="username"/>
+        <input type="password" placeholder="密码" name="pw" id="password"/><br>
+        <button onClick="save()">登录</button>
+    </div>
+    <h2><a onClick="register()">注册</a><br></h2>
+</div>
+
+<script type="text/html" id="register">
+    <div class="layui-field-box">
+        <form class="layui-form">
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">昵称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="insert_username" class="layui-input" placeholder="请输入昵称">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="insert_password" class="layui-input" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">重复密码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="insert_passwordRepeat" class="layui-input" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="sex" class="layui-input" value="男" title="男" checked="">
+                    <input type="radio" name="sex" class="layui-input" value="女" title="女">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="insert_tel" class="layui-input" placeholder="请输入电话" lay-verify="phone">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-pane">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="insert_email" class="layui-input" placeholder="请输入邮箱" lay-verify="email">
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script src="../jquery/jquery-3.6.0.js"></script>
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        //如果你的 HTML 是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来进行渲染
+        form.render();
+    });
+</script>
+
+<script src="../js/login.js"></script>
+<script type="text/javascript" src="../js/md5.js"></script>
+
+</body>
+</html>

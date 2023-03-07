@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MateMapper">
+  <resultMap id="BaseResultMap" type="pojo.Mate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="mate_id" jdbcType="INTEGER" property="mateId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, mate_id, `time`
+  </sql>
+
+
+  <select id="selectByUserid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lovedb.mate
+    where user_id = #{user_id}
+  </select>
+
+
+  <insert id="insert"  parameterType="pojo.Mate">
+    insert into lovedb.mate (user_id, mate_id, `time`)
+    values (#{userId}, #{mateId}, #{time})
+  </insert>
+
+</mapper>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+
+  <link rel="stylesheet" href="../layui/css/layui.css">
+
+  <style>
+    #sendDiary{
+      position: fixed;
+      top: 50%;
+      left: 95%;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      border-radius: 50px;
+      background: #d7927b;
+      color: #3a034f;
+    }
+  </style>
+</head>
+<body style="background-image: url(../image/bg3.jpg);background-size: 100%;opacity: 0.5;">
+<ul class="layui-timeline">
+</ul>
+<button id="sendDiary" type="button" class="layui-btn">发送</button>
+<script type="text/html" id="insert_diary">
+  <form class="layui-form" style="text-align: center"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item layui-form-text">
+      <div class="layui-input-block">
+        <textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="diaryMessage"></textarea>
+      </div>
+    </div>
+  </form>
+</script>
+<script src="../layui/layui.js"></script>
+<script src="../jquery/jquery-3.6.0.js"></script>
+<script>
+  //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+  function str(img,date,title,content){
+    return "  <li class=\"layui-timeline-item\">\n" +
+            "    <img class=\"layui-icon layui-timeline-axis\" src=\""+img+"\">\n" +
+            "    <div class=\"layui-timeline-content layui-text\">\n" +
+            "      <h3 class=\"layui-timeline-title\">"+date+"</h3>\n" +
+            "      <div class=\"layui-collapse\" style=\"width: 50%;\">\n" +
+            "        <div class=\"layui-colla-item\">\n" +
+            "          <h2 class=\"layui-colla-title\">"+title+"</h2>\n" +
+            "          <div class=\"layui-colla-content\">\n" +
+                          content +
+            "          </div>\n" +
+            "        </div>\n" +
+            "      </div>\n" +
+            "    </div>\n" +
+            "  </li>";
+  }
+
+  let matename=sessionStorage.getItem("mate_name");
+  if(matename=='null')
+  {
+    layer.msg("你未配对伴侣，请前往个人信息界面寻找你的另一半")
+  }
+  else{
+    layui.use(['element','layer'], function(){
+      var element = layui.element
+              ,layer = layui.layer;
+
+      $("#sendDiary").click(()=>{
+        layer.open({
+          type: 1
+          , title: '发起一条回忆' //不显示标题栏
+          , closeBtn: false
+          , area: ['500px', '300px']  // 宽和高
+          , shade: 0.1
+          , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+          , btn: ['新增', '取消']
+          , btnAlign: 'c'
+          , moveType: 1 //拖拽模式，0或者1
+          , content: $('#insert_diary').html()         // 引入自定义表单
+          , btn1: function (index, layero) {// 这个是新增按钮点击事件
+            console.log($("#diaryMessage").val());
+            if($("#diaryMessage").val()===""||$("#diaryMessage").val()==null){
+              layer.msg("请输入内容");
+              return;
+            }
+            $.ajax({
+              url:"/diary/insert",   // 请求路径
+              type:"post",            // 请求的方式，不区分大小写
+              data:{
+                diary:$("#diaryMessage").val()
+              },
+              datatype:"json",        // 返回类型，text文本、html页面、json数据
+              success:function(response){
+                layer.msg("发表成功");
+              }
+            });
+            layer.close(index);
+            window.location.reload();
+          }
+          ,anim: 4
+          ,shadeClose:true
+        });
+      });
+
+      $.ajax({
+        url:"/diary/selectById",   // 请求路径
+        type:"get",            // 请求的方式，不区分大小写
+        datatype:"json",        // 返回类型，text文本、html页面、json数据
+        success:function(response){
+          var data = response.data;
+          $.each(data,function(index,info){
+            var avatar = info.user.avatar;
+            var date = info.time;
+            var title;
+            var content = info.content.replaceAll('\n','<br>');
+            content=content.replaceAll('','&nbsp;');
+            if(content.length<=10){
+              title = info.content+"......";
+            }else {
+              title = info.content.substr(0,10)+"......";
+            }
+            $("ul[class='layui-timeline']").append(str(avatar,date,title,content));
+          });
+          element.render('collapse');
+        }
+      });
+    });
+  }
+
+</script>
+</body>
+</html>
